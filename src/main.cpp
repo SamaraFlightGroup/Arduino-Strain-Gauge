@@ -10,6 +10,7 @@ Application app;
 void setup()
 {
   Serial.begin(115200);
+  // BAUD Rate on serial monitor = 115200
 }
 
 void loop()

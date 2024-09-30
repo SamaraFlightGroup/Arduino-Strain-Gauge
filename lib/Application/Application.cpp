@@ -19,16 +19,18 @@ void Application::runApp()
     setTogglesLow();
     // printMode = PRINT_RAW_DATA;
     // printMode = PRINT_CURRENT_MIDI;
+    // printMode = PRINT_CURRENT_CURRENT_MEAN;
     receiveMidiInput();
     receiveAdcData();
     runStateMachine();
     checkPrintModeTransition();
-
+    //latestMean = findMean();
     printCsv();
 }
 
 void Application::runStateMachine()
 {
+    
     printMode = PRINT_CURRENT_WEIGHT;
     if (state == IDLE)
     {
@@ -165,7 +167,8 @@ void Application::checkPrintModeTransition()
 
 void Application::calculateWeight(int64_t devons)
 {
-    currentWeight = (double)devons * 0.0023;
+    currentWeight = ((double)devons-123248) * 0.0023;
+    // 123248 sets weight calculation offset
 }
 
 void Application::updateMidiVariables(uint8_t midiSwitch, uint8_t midiVariable)
@@ -178,7 +181,8 @@ void Application::receiveAdcData()
     if (scale.wait_ready_timeout(1000))
     {
         long reading = scale.read();
-        currentData = reading - 123248;
+        currentData = reading - 0;
+        // 0 is raw data offset
     }
     else
     {
@@ -200,6 +204,7 @@ void Application::setTogglesLow()
 void Application::printCsv()
 {
     if (millis() - lastPrintTime > printDelay)
+    // change printDelay in Application.hpp 
     {
 
         if (printMode == PRINT_SWITCH_UNIFORMS)
