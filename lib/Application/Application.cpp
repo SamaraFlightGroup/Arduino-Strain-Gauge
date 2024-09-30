@@ -29,7 +29,7 @@ void Application::runApp()
 
 void Application::runStateMachine()
 {
-    // printMode = PRINT_CURRENT_MIDI;
+    printMode = PRINT_CURRENT_WEIGHT;
     if (state == IDLE)
     {
         checkTransitionFromIdle();
