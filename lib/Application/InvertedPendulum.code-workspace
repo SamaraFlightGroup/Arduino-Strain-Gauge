@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "../../../InvertedPendulumGit/InvertedPendulum"
+		},
+		{
+			"name": "StrainGage",
+			"path": "../.."
+		}
+	],
+	"settings": {}
+}
